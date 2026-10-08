@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TQ - Quản trị viên</title>
+    <script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="css/style.css">
+</head>
+<body class="text-gray-800 relative bg-[#F8F9F8]">
+    <header class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 cursor-pointer">
+                <div class="w-8 h-8 rounded-md bg-[#F05123] flex items-center justify-center text-white font-bold">TQ</div>
+                <div><h1 class="font-bold text-base text-black">Admin Panel</h1></div>
+            </a>
+            <div class="flex items-center gap-2">
+                <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-black mr-4">Trở về Web</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8" id="admin-content">
+        <div class="mb-8 flex justify-between items-end">
+            <div>
+                <h2 class="text-3xl font-bold text-[#1B2A24] mb-2">Quản lý người dùng</h2>
+                <p class="text-gray-500 text-sm">Tổng cộng: <strong id="total-users" class="text-black">0</strong> tài khoản.</p>
+            </div>
+            <button onclick="document.getElementById('addUserModal').classList.remove('hidden'); document.getElementById('addUserModal').classList.add('flex');" class="bg-green-600 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-md hover:bg-green-700 transition-colors">+ Thêm tài khoản</button>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+                            <th class="p-4 font-bold">ID</th>
+                            <th class="p-4 font-bold">Tài khoản</th>
+                            <th class="p-4 font-bold">Phân quyền</th>
+                            <th class="p-4 font-bold">Trạng thái</th>
+                            <th class="p-4 font-bold text-right">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-users-list" class="divide-y divide-gray-100"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Thêm Người Dùng -->
+    <div id="addUserModal" class="hidden fixed inset-0 z-[60] items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+        <div class="bg-white p-6 md:p-8 rounded-3xl w-full max-w-md shadow-2xl relative">
+            <button onclick="document.getElementById('addUserModal').classList.add('hidden'); document.getElementById('addUserModal').classList.remove('flex');" class="absolute top-4 right-4 text-gray-400 hover:text-black text-lg">✕</button>
+            <h3 class="text-2xl font-bold mb-6 text-[#1B2A24]">Thêm người dùng mới</h3>
+            <div class="space-y-4 mb-6">
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Họ tên</label><input type="text" id="addUserName" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#F05123]"></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Email</label><input type="email" id="addUserEmail" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#F05123]"></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Mật khẩu</label><input type="password" id="addUserPass" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#F05123]"></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Phân quyền</label>
+                    <select id="addUserRole" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#F05123] bg-white">
+                        <option value="user">Học viên (User)</option>
+                        <option value="admin">Quản trị viên (Admin)</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="adminAddUser()" class="w-full bg-[#1B2A24] text-white rounded-xl py-3 font-bold hover:bg-black transition-colors shadow-md">Tạo tài khoản</button>
+        </div>
+    </div>
+    
+    <div id="toast-container"></div>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
